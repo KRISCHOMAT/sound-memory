@@ -1,6 +1,11 @@
+html, body{
+  height: 100%;
+}
+
 body {
   text-align: center;
   background-color: #F5F5F5;
+  align-items: center;
 }
 
 h1 {
@@ -17,8 +22,11 @@ h1 {
   margin: auto;
 }
 
+/* .form-signin .form-floating:focus-within {
+  z-index: 2;
+} */
+
 .simplebox {
-  outline: none;
   -webkit-box-shadow: none !important;
 }
 
@@ -107,9 +115,6 @@ h1 {
   display: block;
 }
 
-@media all and (max-width:480px){
-  .btn{width: 100%}
-}
 
 #startButton{
   margin: 32px;
