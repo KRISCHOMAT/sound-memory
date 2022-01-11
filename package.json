@@ -1,0 +1,15 @@
+{
+  "name": "sound-memory",
+  "version": "1.0.0",
+  "description": "Sound Memory Game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christian Grothe",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2"
+  }
+}
