@@ -116,7 +116,17 @@ hr {
   display: block;
 }
 
+.hidden{
+
+}
 
 #startButton{
   margin: 32px;
+}
+
+
+@media (hover:none){
+  .memoryCard:hover {
+    background-color: #FF5959;
+  }
 }
