@@ -117,6 +117,7 @@ function restart() {
   player2.score = 0;
   $("#player1Score").text(player1.score);
   $("#player2Score").text(player2.score);
+  var gameCount = Math.floor(Math.random() * 2 + 1);
   assignSounds();
 }
 
