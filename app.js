@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require ("body-parser");
+var player = require ("play-sound");
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.get("/", function(req, res){
 
 app.post("/", function(req, res){
   res.sendFile(__dirname + "/main.html");
+  const soundName = req.body.cardName;
+  console.log(soundName);
 });
 
 

@@ -1,4 +1,3 @@
-// Game Part
 
 var player1 = {
   name: window.sessionStorage.getItem("playerOne"),
@@ -23,30 +22,32 @@ var cardCount = 0;
 var gameCount = Math.floor(Math.random() * 2 + 1);
 
 // Assign Sounds
-while (soundNumbers.length < memoryCards) {
-  var newNum = Math.floor(Math.random() * soundNum + 1);
-  if (soundNumbers.includes(newNum) === false) {
-    soundNumbers.push(newNum);
-    soundNumbers.push(newNum);
+function assignSounds(){
+
+  while (soundNumbers.length < memoryCards) {
+    var newNum = Math.floor(Math.random() * soundNum + 1);
+    if (soundNumbers.includes(newNum) === false) {
+      soundNumbers.push(newNum);
+      soundNumbers.push(newNum);
+    }
   }
-}
 
-while (soundNumbers.length < memoryCards) {
-  var newNum = Math.floor(Math.random() * soundNum + 1);
-  if (soundNumbers.includes(newNum) === false) {
-    soundNumbers.push(newNum);
-    soundNumbers.push(newNum);
+  while (soundNumbers.length < memoryCards) {
+    var newNum = Math.floor(Math.random() * soundNum + 1);
+    if (soundNumbers.includes(newNum) === false) {
+      soundNumbers.push(newNum);
+      soundNumbers.push(newNum);
+    }
   }
+
+  for (var i = 1; i <= memoryCards; i++) {
+    var randIndex = Math.floor(Math.random() * soundNumbers.length);
+    $("#" + i).attr("name", "sound" + soundNumbers[randIndex]);
+    soundNumbers.splice(randIndex, 1);
+  }
+
 }
 
-for (var i = 1; i <= memoryCards; i++) {
-  var randIndex = Math.floor(Math.random() * soundNumbers.length);
-  $("#" + i).attr("name", "sound" + soundNumbers[randIndex]);
-  soundNumbers.splice(randIndex, 1);
-}
-
-// Game Starts
-turn();
 
 function turn() {
 
@@ -64,6 +65,9 @@ function turn() {
     $("#player1").removeClass("turn").addClass("player");
   }
 }
+
+turn();
+assignSounds();
 
 function compareCards(card1, card2) {
   if (card1 === card2) {
@@ -95,12 +99,15 @@ function compareCards(card1, card2) {
 }
 
 function gameEnds() {
-  if (player1.score > player2.score) {
-    $("#player1Score").text("WINNER");
-    $("#player2Score").text("LOOSER");
+  if (player1.score === player2.score){
+    $("#player1Score").text("Wins!");
+    $("#player2Score").text("Wins!");
+  } else if (player1.score > player2.score) {
+    $("#player1Score").text("Wins!");
+    $("#player2Score").text("");
   } else {
-    $("#player2Score").text("WINNER");
-    $("#player1Score").text("LOOSER");
+    $("#player2Score").text("Wins!");
+    $("#player1Score").text("");
   }
 }
 
@@ -110,12 +117,16 @@ function restart() {
   player2.score = 0;
   $("#player1Score").text(player1.score);
   $("#player2Score").text(player2.score);
+  assignSounds();
 }
 
 
 $(".memoryCard").click(function() {
   var chosenCard = $(this);
   var cardName = $(this).attr("name");
+
+  var audio = new Audio("sounds/"+ cardName +".mp3");
+  audio.play();
 
   if (chosenCard.hasClass("memoryCard")) {
     chosenCard.removeClass("memoryCard").addClass("cardPending");
