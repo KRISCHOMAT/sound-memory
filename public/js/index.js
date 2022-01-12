@@ -16,7 +16,7 @@ $("#player2Score").text(player2.score);
 
 var soundNumbers = [];
 var memoryCards = 16;
-var soundNum = 8;
+var soundNum = 16;
 var chosenCards = [];
 var cardCount = 0;
 var gameCount = Math.floor(Math.random() * 2 + 1);
