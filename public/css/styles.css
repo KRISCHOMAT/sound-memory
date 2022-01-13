@@ -78,53 +78,73 @@ hr {
   margin-right: auto;
 }
 
-.memoryCard {
-  background-color: #FF5959;
+/* Memory Cards  */
+
+.col{
   height: 100px;
   border: 5px solid;
   border-radius: 10%;
   margin: 5px;
+}
+
+.memoryCardStart {
+  background-color: #FF5959;
+  animation-name: start;
+  animation-duration: 2s;
+}
+
+.memoryCard {
+  background-color: #FF5959;
 }
 
 .cardOut {
   background-color: #FEECE9;
-  height: 100px;
-  border: 5px solid;
-  border-radius: 10%;
-  margin: 5px;
+  animation-name: out;
+  animation-duration: 2s;
 }
 
 .cardPending {
   background-color: #FFAFAF;
-  height: 100px;
-  border: 5px solid;
-  border-radius: 10%;
-  margin: 5px;
 }
 
 .memoryCard:hover {
   background-color: #FE7E6D;
 }
 
+.memoryCardStart:hover {
+  background-color: #FE7E6D;
+}
+
+/* Animation */
+
+@keyframes out {
+  from {background-color:#FFAFAF}
+  to {background-color: #FEECE9}
+}
+
+@keyframes start {
+  from {background-color:#FEECE9}
+  to {background-color: #FF5959}
+}
+
+/* Else */
+
 .memoryDeck {
   display: block;
   margin: 20px;
-
 }
 
 .button{
   display: block;
 }
 
-.hidden{
-
-}
 
 #startButton{
   margin: 32px;
 }
 
 
+/* Prevent Hover On Mobile Devices */
 @media (hover:none){
   .memoryCard:hover {
     background-color: #FF5959;

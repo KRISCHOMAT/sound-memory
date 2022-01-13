@@ -22,7 +22,7 @@ var cardCount = 0;
 var gameCount = Math.floor(Math.random() * 2 + 1);
 
 // Assign Sounds
-function assignSounds(){
+function assignSounds() {
 
   while (soundNumbers.length < memoryCards) {
     var newNum = Math.floor(Math.random() * soundNum + 1);
@@ -70,6 +70,7 @@ turn();
 assignSounds();
 
 function compareCards(card1, card2) {
+
   if (card1 === card2) {
     $("div[name='" + card1 + "']").removeClass("cardPending").addClass("cardOut");
     $("div[name='" + card2 + "']").removeClass("cardPending").addClass("cardOut");
@@ -89,17 +90,18 @@ function compareCards(card1, card2) {
     setTimeout(function() {
       $("div[name='" + card1 + "']").removeClass("cardPending").addClass("memoryCard");
       $("div[name='" + card2 + "']").removeClass("cardPending").addClass("memoryCard");
+      $("div[name='" + card1 + "']").removeClass("memoryCardStart").addClass("memoryCard");
+      $("div[name='" + card2 + "']").removeClass("memoryCardStart").addClass("memoryCard");
       turn();
-    }, 500);
+    }, 800);
 
     cardCount = 0;
     chosenCards = [];
   }
-
 }
 
 function gameEnds() {
-  if (player1.score === player2.score){
+  if (player1.score === player2.score) {
     $("#player1Score").text("Wins!");
     $("#player2Score").text("Wins!");
   } else if (player1.score > player2.score) {
@@ -112,7 +114,7 @@ function gameEnds() {
 }
 
 function restart() {
-  $(".cardOut").removeClass("cardOut").addClass("memoryCard");
+  $(".cardOut").removeClass("cardOut").addClass("memoryCardStart");
   player1.score = 0;
   player2.score = 0;
   $("#player1Score").text(player1.score);
@@ -122,15 +124,19 @@ function restart() {
 }
 
 
-$(".memoryCard").click(function() {
+$(".memoryCard, .memoryCardStart").click(function() {
   var chosenCard = $(this);
   var cardName = $(this).attr("name");
 
-  var audio = new Audio("sounds/"+ cardName +".mp3");
+  var audio = new Audio("sounds/" + cardName + ".mp3");
   audio.play();
 
-  if (chosenCard.hasClass("memoryCard")) {
-    chosenCard.removeClass("memoryCard").addClass("cardPending");
+  if (chosenCard.hasClass("memoryCard") || chosenCard.hasClass("memoryCardStart")) {
+    if (chosenCard.hasClass("memoryCard")){
+      chosenCard.removeClass("memoryCard").addClass("cardPending");
+    } else {
+      chosenCard.removeClass("memoryCardStart").addClass("cardPending");
+    }
     chosenCards.push(cardName);
     cardCount++
     if (cardCount === 2) {
@@ -146,4 +152,5 @@ $(".memoryCard").click(function() {
 
 $("button").click(function() {
   restart();
+  turn();
 });
